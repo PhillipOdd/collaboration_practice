@@ -1,4 +1,5 @@
 # collaboration_practice
+<<<<<<< HEAD
 # Group 1 Collaboration - Safari Kenya
 
 We created a simple travel website for a travelling agency by the use of HTML and CSS
@@ -13,3 +14,6 @@ We created a simple travel website for a travelling agency by the use of HTML an
 ## Languages used
 - HTML
 - CSS 
+=======
+# this is a test
+>>>>>>> origin/Absalom

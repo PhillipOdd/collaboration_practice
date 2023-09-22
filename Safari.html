@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <title>Safari-Kenya</title>
+    <title>SAFARI KENYA</title>
 </head>
+
 <body>
     <header>
-        <h1>Welcome to Safari-Kenya</h1>
-        <p>Your Ultimate African Adventure</p>
+        <h1>Welcome to Safari Kenya</h1>
+        <p>Your Ultimate African Safari Experience</p>
     </header>
     <nav>
         <ul>
@@ -20,9 +23,10 @@
             <li><a href="#">Contact</a></li>
         </ul>
     </nav>
-    <div class="container">
+    <div clas="container">
         <h2>Discover the Beauty of Kenya</h2>
-        <p>Embark on an extraordinary journey to explore the wonders of Kenya. Our Safari-Kenya adventure offers you a unique opportunity to experience:</p>
+        <p>Embark on an extraordinary journey to explore the wonders of Kenya. Our Safari-Kenya adventure offers you a
+            unique opportunity to experience:</p>
         <ul>
             <li>Thrilling wildlife safaris in renowned national parks</li>
             <li>Breathtaking views of majestic landscapes, from the Great Rift Valley to Mount Kenya</li>
@@ -30,9 +34,67 @@
             <li>Delicious cuisine featuring Kenyan specialties</li>
         </ul>
         <p>Join us for an adventure of a lifetime and create lasting memories in the heart of Africa.</p>
+
+
     </div>
+
+    <div>
+        <label for="currency">Select a currency:</label>
+        <select id="currency">
+            <option value="USD">USD - United States Dollar</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - British Pound Sterling</option>
+            <option value="JPY">JPY - Japanese Yen</option>
+            <option value="CAD">CAD - Canadian Dollar</option>
+        </select>
+        <br>
+        <label for="amount">Enter an amount:</label>
+        <input type="number" id="amount" placeholder="Enter amount...">
+        <button onclick="convertCurrency()">Convert</button>
+    </div>
+
+    <!-- Conversion result -->
+    <div id="conversion-result">
+        <!-- Results will be displayed here -->
+    </div>
+
+    <script>
+        function convertCurrency() {
+            const currencySelect = document.getElementById('currency');
+            const selectedCurrency = currencySelect.value;
+            const amountInput = document.getElementById('amount');
+            const amount = parseFloat(amountInput.value);
+
+            // Replace 'YOUR_API_KEY' with your actual API key
+            const apiKey = Ye038a291b9823bda67b7faa4;
+
+            // Fetch exchange rates from Open Exchange Rates API
+            $.ajax({
+                url: `https://open.er-api.com/v6/latest/${apiKey}/KES`,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    const exchangeRate = data.rates[selectedCurrency];
+                    if (exchangeRate) {
+                        const convertedAmount = amount * exchangeRate;
+                        const resultElement = document.getElementById('conversion-result');
+                        resultElement.innerHTML = `<p>${amount} ${selectedCurrency} = ${convertedAmount.toFixed(2)} KES</p>`;
+                    } else {
+                        alert('Invalid currency selection.');
+                    }
+                },
+                error: function () {
+                    alert('Error fetching exchange rates. Please try again later.');
+                }
+            });
+        }
+    </script>
+
+
     <footer>
-        &copy; 2023 Safari-Kenya | All rights reserved | <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a>
+        &copy; 2023 Safari-Kenya | All rights reserved | <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a
+            href="#">Instagram</a>
     </footer>
 </body>
+
 </html>
